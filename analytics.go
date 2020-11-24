@@ -216,6 +216,8 @@ func (c *client) Close() (err error) {
 			err = ErrClosed
 		}
 	}()
+	fmt.Println("letting the interval flush the rest of the messages")
+	time.Sleep((c.Interval * 2) * time.Second)
 	close(c.quit)
 	<-c.shutdown
 	return

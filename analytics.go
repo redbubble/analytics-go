@@ -271,8 +271,8 @@ func (c *client) send(msgs []message) {
 		// Wait for either a retry timeout or the client to be closed.
 		select {
 		case <-time.After(c.RetryAfter(i)):
-			fmt.Println("gonna retry")
-			break
+			c.logf("gonna wait a bit")
+			continue
 		case <-c.quit:
 			//c.errorf("%d messages dropped because they failed to be sent and the client was closed", len(msgs))
 			//c.notifyFailure(msgs, err)
